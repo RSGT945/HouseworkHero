@@ -322,6 +322,38 @@
                             <div class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full inline-block">未完成</div>
                         </div>
                     </article>
+                    
+                    <!-- 书房任务 -->
+                    <article class="hero-card bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-3 md:p-4 touch-target shadow-md" role="button" tabindex="0" aria-label="书房任务，简单难度">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base md:text-lg mb-1">书房任务</h3>
+                            <div class="flex mb-2" aria-label="难度1星">
+                                <span class="star">★</span>
+                            </div>
+                            <div class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full inline-block">未完成</div>
+                        </div>
+                    </article>
+                    
+                    <!-- 阳台任务 -->
+                    <article class="hero-card bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-3 md:p-4 touch-target shadow-md" role="button" tabindex="0" aria-label="阳台任务，中等难度">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-base md:text-lg mb-1">阳台任务</h3>
+                            <div class="flex mb-2" aria-label="难度2星">
+                                <span class="star">★★</span>
+                            </div>
+                            <div class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full inline-block">未完成</div>
+                        </div>
+                    </article>
                 </div>
             </section>
             
@@ -418,6 +450,95 @@
                                 <div class="text-sm">金币</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 房间布局配置 -->
+            <section class="mb-6 md:mb-8" aria-labelledby="layout-heading">
+                <h2 id="layout-heading" class="text-xl md:text-2xl font-bold mb-4 text-gray-800">房间布局配置</h2>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <div class="mb-4">
+                        <label for="room-select" class="block text-sm font-medium text-gray-700 mb-2">选择房间</label>
+                        <select id="room-select" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                            <option value="bedroom">卧室</option>
+                            <option value="living-room">客厅</option>
+                            <option value="bathroom">卫生间</option>
+                            <option value="kitchen">厨房</option>
+                            <option value="study">书房</option>
+                            <option value="balcony">阳台</option>
+                            <option value="custom">自定义房间</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">房间布局</label>
+                        <div id="room-layout" class="border-2 border-dashed border-gray-300 rounded-lg p-4 h-64 relative bg-white">
+                            <div class="absolute top-2 left-2 text-sm text-gray-500">拖拽物品到此处</div>
+                            <!-- 拖拽物品将显示在这里 -->
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">可拖拽物品</label>
+                        <div class="flex flex-wrap gap-2">
+                            <div class="drag-item bg-blue-100 text-blue-800 px-3 py-2 rounded-lg cursor-move" data-item="bed">床</div>
+                            <div class="drag-item bg-green-100 text-green-800 px-3 py-2 rounded-lg cursor-move" data-item="sofa">沙发</div>
+                            <div class="drag-item bg-yellow-100 text-yellow-800 px-3 py-2 rounded-lg cursor-move" data-item="table">桌子</div>
+                            <div class="drag-item bg-purple-100 text-purple-800 px-3 py-2 rounded-lg cursor-move" data-item="chair">椅子</div>
+                            <div class="drag-item bg-pink-100 text-pink-800 px-3 py-2 rounded-lg cursor-move" data-item="closet">衣柜</div>
+                            <div class="drag-item bg-indigo-100 text-indigo-800 px-3 py-2 rounded-lg cursor-move" data-item="shelf">书架</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3 mb-4">
+                        <button id="save-layout" class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-lg transition flex-1" aria-label="保存布局">
+                            保存布局
+                        </button>
+                        <button id="reset-layout" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition" aria-label="重置布局">
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 关键物品位置设置 -->
+            <section class="mb-6 md:mb-8" aria-labelledby="items-heading">
+                <h2 id="items-heading" class="text-xl md:text-2xl font-bold mb-4 text-gray-800">关键物品位置设置</h2>
+                <div class="bg-gray-50 rounded-lg p-4">
+                    <div class="mb-4">
+                        <label for="item-name" class="block text-sm font-medium text-gray-700 mb-2">物品名称</label>
+                        <input type="text" id="item-name" class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="例如：电视遥控器、钥匙" aria-label="输入物品名称">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="item-location" class="block text-sm font-medium text-gray-700 mb-2">位置信息</label>
+                        <input type="text" id="item-location" class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="例如：客厅茶几抽屉" aria-label="输入位置信息">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="clean-frequency" class="block text-sm font-medium text-gray-700 mb-2">清洁频率</label>
+                        <select id="clean-frequency" class="w-full border border-gray-300 rounded-lg px-3 py-2" aria-label="选择清洁频率">
+                            <option value="daily">每天</option>
+                            <option value="weekly">每周</option>
+                            <option value="biweekly">每两周</option>
+                            <option value="monthly">每月</option>
+                            <option value="quarterly">每季度</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="item-notes" class="block text-sm font-medium text-gray-700 mb-2">备注</label>
+                        <textarea id="item-notes" class="w-full border border-gray-300 rounded-lg px-3 py-2" rows="2" placeholder="例如：放在固定位置，避免丢失" aria-label="输入备注信息"></textarea>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button id="add-item" class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded-lg transition flex-1" aria-label="添加物品">
+                            添加物品
+                        </button>
+                        <button id="view-items" class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition" aria-label="查看物品列表">
+                            查看列表
+                        </button>
                     </div>
                 </div>
             </section>
@@ -687,7 +808,9 @@
                             { id: 0, name: "卧室任务", difficulty: 1, assignedTo: null, completed: false, assigneeName: "" },
                             { id: 1, name: "客厅任务", difficulty: 2, assignedTo: null, completed: false, assigneeName: "" },
                             { id: 2, name: "卫生间任务", difficulty: 3, assignedTo: null, completed: false, assigneeName: "" },
-                            { id: 3, name: "厨房任务", difficulty: 4, assignedTo: null, completed: false, assigneeName: "" }
+                            { id: 3, name: "厨房任务", difficulty: 4, assignedTo: null, completed: false, assigneeName: "" },
+                            { id: 4, name: "书房任务", difficulty: 1, assignedTo: null, completed: false, assigneeName: "" },
+                            { id: 5, name: "阳台任务", difficulty: 2, assignedTo: null, completed: false, assigneeName: "" }
                         ]
                     };
                 }
@@ -781,6 +904,8 @@
                                 case 1: statusElement.classList.add('bg-blue-100', 'text-blue-800'); break;
                                 case 2: statusElement.classList.add('bg-green-100', 'text-green-800'); break;
                                 case 3: statusElement.classList.add('bg-purple-100', 'text-purple-800'); break;
+                                case 4: statusElement.classList.add('bg-indigo-100', 'text-indigo-800'); break;
+                                case 5: statusElement.classList.add('bg-yellow-100', 'text-yellow-800'); break;
                             }
                         }
                     }
@@ -1009,6 +1134,435 @@
             updateHeroPanel();
         }
 
+        // 房间布局数据
+        let roomLayouts = {
+            bedroom: [],
+            'living-room': [],
+            bathroom: [],
+            kitchen: [],
+            study: [],
+            balcony: [],
+            custom: []
+        };
+
+        // 关键物品数据
+        let keyItems = [];
+
+        // 初始化拖拽功能
+        function initDragAndDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZone = document.getElementById('room-layout');
+            const saveLayoutBtn = document.getElementById('save-layout');
+            const resetLayoutBtn = document.getElementById('reset-layout');
+            const roomSelect = document.getElementById('room-select');
+
+            // 加载保存的布局
+            loadRoomLayouts();
+
+            // 设置拖拽物品事件
+            dragItems.forEach(item => {
+                item.setAttribute('draggable', 'true');
+                item.addEventListener('dragstart', handleDragStart);
+            });
+
+            // 设置放置区域事件
+            if (dropZone) {
+                dropZone.addEventListener('dragover', handleDragOver);
+                dropZone.addEventListener('drop', handleDrop);
+            }
+
+            // 保存布局按钮
+            if (saveLayoutBtn) {
+                saveLayoutBtn.addEventListener('click', saveRoomLayout);
+            }
+
+            // 重置布局按钮
+            if (resetLayoutBtn) {
+                resetLayoutBtn.addEventListener('click', resetRoomLayout);
+            }
+
+            // 房间选择变化
+            if (roomSelect) {
+                roomSelect.addEventListener('change', loadCurrentRoomLayout);
+            }
+        }
+
+        // 拖拽开始
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.dataset.item);
+            e.target.classList.add('opacity-50');
+        }
+
+        // 拖拽经过
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('border-blue-400');
+        }
+
+        // 放置物品
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('border-blue-400');
+            
+            const itemType = e.dataTransfer.getData('text/plain');
+            const dropZone = e.currentTarget;
+            
+            // 创建新的物品元素
+            const itemElement = document.createElement('div');
+            itemElement.className = 'absolute p-2 rounded-lg text-sm cursor-move';
+            itemElement.dataset.item = itemType;
+            
+            // 设置物品样式
+            switch(itemType) {
+                case 'bed':
+                    itemElement.className += ' bg-blue-100 text-blue-800 w-24 h-16';
+                    itemElement.textContent = '床';
+                    break;
+                case 'sofa':
+                    itemElement.className += ' bg-green-100 text-green-800 w-32 h-12';
+                    itemElement.textContent = '沙发';
+                    break;
+                case 'table':
+                    itemElement.className += ' bg-yellow-100 text-yellow-800 w-20 h-20';
+                    itemElement.textContent = '桌子';
+                    break;
+                case 'chair':
+                    itemElement.className += ' bg-purple-100 text-purple-800 w-12 h-12';
+                    itemElement.textContent = '椅子';
+                    break;
+                case 'closet':
+                    itemElement.className += ' bg-pink-100 text-pink-800 w-16 h-24';
+                    itemElement.textContent = '衣柜';
+                    break;
+                case 'shelf':
+                    itemElement.className += ' bg-indigo-100 text-indigo-800 w-12 h-20';
+                    itemElement.textContent = '书架';
+                    break;
+            }
+
+            // 计算放置位置
+            const rect = dropZone.getBoundingClientRect();
+            const x = e.clientX - rect.left - 40; // 调整位置
+            const y = e.clientY - rect.top - 20;
+            
+            itemElement.style.left = `${Math.max(0, Math.min(x, rect.width - 80))}px`;
+            itemElement.style.top = `${Math.max(0, Math.min(y, rect.height - 40))}px`;
+
+            // 添加到放置区域
+            dropZone.appendChild(itemElement);
+
+            // 使物品可拖动
+            makeItemDraggable(itemElement);
+
+            // 移除拖拽开始时的样式
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.classList.remove('opacity-50');
+            });
+        }
+
+        // 使物品可拖动
+        function makeItemDraggable(item) {
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            item.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                offsetX = e.clientX - item.getBoundingClientRect().left;
+                offsetY = e.clientY - item.getBoundingClientRect().top;
+                item.style.zIndex = '1000';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                
+                const dropZone = document.getElementById('room-layout');
+                const rect = dropZone.getBoundingClientRect();
+                
+                let newX = e.clientX - rect.left - offsetX;
+                let newY = e.clientY - rect.top - offsetY;
+                
+                // 限制在放置区域内
+                newX = Math.max(0, Math.min(newX, rect.width - item.offsetWidth));
+                newY = Math.max(0, Math.min(newY, rect.height - item.offsetHeight));
+                
+                item.style.left = `${newX}px`;
+                item.style.top = `${newY}px`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    item.style.zIndex = '1';
+                }
+            });
+
+            // 双击删除物品
+            item.addEventListener('dblclick', () => {
+                item.remove();
+            });
+        }
+
+        // 保存房间布局
+        function saveRoomLayout() {
+            const roomSelect = document.getElementById('room-select');
+            const dropZone = document.getElementById('room-layout');
+            const selectedRoom = roomSelect.value;
+
+            // 收集布局数据
+            const items = [];
+            dropZone.querySelectorAll('[data-item]').forEach(item => {
+                items.push({
+                    type: item.dataset.item,
+                    left: item.style.left,
+                    top: item.style.top,
+                    width: item.offsetWidth,
+                    height: item.offsetHeight
+                });
+            });
+
+            // 保存到本地存储
+            roomLayouts[selectedRoom] = items;
+            localStorage.setItem('houseworkHeroRoomLayouts', JSON.stringify(roomLayouts));
+
+            alert('布局保存成功！');
+        }
+
+        // 重置房间布局
+        function resetRoomLayout() {
+            const dropZone = document.getElementById('room-layout');
+            dropZone.innerHTML = '<div class="absolute top-2 left-2 text-sm text-gray-500">拖拽物品到此处</div>';
+        }
+
+        // 加载房间布局
+        function loadRoomLayouts() {
+            try {
+                const savedLayouts = localStorage.getItem('houseworkHeroRoomLayouts');
+                if (savedLayouts) {
+                    roomLayouts = JSON.parse(savedLayouts);
+                }
+            } catch (e) {
+                console.warn('无法加载房间布局:', e);
+            }
+        }
+
+        // 加载当前选择的房间布局
+        function loadCurrentRoomLayout() {
+            const roomSelect = document.getElementById('room-select');
+            const dropZone = document.getElementById('room-layout');
+            const selectedRoom = roomSelect.value;
+
+            // 清空当前布局
+            dropZone.innerHTML = '<div class="absolute top-2 left-2 text-sm text-gray-500">拖拽物品到此处</div>';
+
+            // 加载保存的布局
+            const items = roomLayouts[selectedRoom] || [];
+            items.forEach(itemData => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'absolute p-2 rounded-lg text-sm cursor-move';
+                itemElement.dataset.item = itemData.type;
+                itemElement.style.left = itemData.left;
+                itemElement.style.top = itemData.top;
+
+                // 设置物品样式
+                switch(itemData.type) {
+                    case 'bed':
+                        itemElement.className += ' bg-blue-100 text-blue-800 w-24 h-16';
+                        itemElement.textContent = '床';
+                        break;
+                    case 'sofa':
+                        itemElement.className += ' bg-green-100 text-green-800 w-32 h-12';
+                        itemElement.textContent = '沙发';
+                        break;
+                    case 'table':
+                        itemElement.className += ' bg-yellow-100 text-yellow-800 w-20 h-20';
+                        itemElement.textContent = '桌子';
+                        break;
+                    case 'chair':
+                        itemElement.className += ' bg-purple-100 text-purple-800 w-12 h-12';
+                        itemElement.textContent = '椅子';
+                        break;
+                    case 'closet':
+                        itemElement.className += ' bg-pink-100 text-pink-800 w-16 h-24';
+                        itemElement.textContent = '衣柜';
+                        break;
+                    case 'shelf':
+                        itemElement.className += ' bg-indigo-100 text-indigo-800 w-12 h-20';
+                        itemElement.textContent = '书架';
+                        break;
+                }
+
+                dropZone.appendChild(itemElement);
+                makeItemDraggable(itemElement);
+            });
+        }
+
+        // 初始化关键物品功能
+        function initKeyItems() {
+            const addItemBtn = document.getElementById('add-item');
+            const viewItemsBtn = document.getElementById('view-items');
+
+            // 加载保存的关键物品
+            loadKeyItems();
+
+            // 添加物品按钮
+            if (addItemBtn) {
+                addItemBtn.addEventListener('click', addKeyItem);
+            }
+
+            // 查看物品列表按钮
+            if (viewItemsBtn) {
+                viewItemsBtn.addEventListener('click', viewKeyItems);
+            }
+        }
+
+        // 加载关键物品数据
+        function loadKeyItems() {
+            try {
+                const savedItems = localStorage.getItem('houseworkHeroKeyItems');
+                if (savedItems) {
+                    keyItems = JSON.parse(savedItems);
+                }
+            } catch (e) {
+                console.warn('无法加载关键物品数据:', e);
+            }
+        }
+
+        // 保存关键物品数据
+        function saveKeyItems() {
+            try {
+                localStorage.setItem('houseworkHeroKeyItems', JSON.stringify(keyItems));
+            } catch (e) {
+                console.warn('无法保存关键物品数据:', e);
+            }
+        }
+
+        // 添加关键物品
+        function addKeyItem() {
+            const itemName = document.getElementById('item-name').value.trim();
+            const itemLocation = document.getElementById('item-location').value.trim();
+            const cleanFrequency = document.getElementById('clean-frequency').value;
+            const itemNotes = document.getElementById('item-notes').value.trim();
+
+            if (!itemName || !itemLocation) {
+                alert('请填写物品名称和位置信息！');
+                return;
+            }
+
+            const newItem = {
+                id: `item-${Date.now()}`,
+                name: itemName,
+                location: itemLocation,
+                frequency: cleanFrequency,
+                notes: itemNotes,
+                createdAt: new Date().toISOString()
+            };
+
+            keyItems.push(newItem);
+            saveKeyItems();
+
+            // 清空表单
+            document.getElementById('item-name').value = '';
+            document.getElementById('item-location').value = '';
+            document.getElementById('clean-frequency').value = 'weekly';
+            document.getElementById('item-notes').value = '';
+
+            alert('物品添加成功！');
+        }
+
+        // 查看关键物品列表
+        function viewKeyItems() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            
+            // 频率文本映射
+            const frequencyMap = {
+                daily: '每天',
+                weekly: '每周',
+                biweekly: '每两周',
+                monthly: '每月',
+                quarterly: '每季度'
+            };
+
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl p-6 w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
+                    <h2 class="text-xl font-bold mb-4 text-center">关键物品列表</h2>
+                    ${keyItems.length > 0 ? `
+                        <div class="space-y-3">
+                            ${keyItems.map(item => `
+                                <div class="border rounded-lg p-4">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h3 class="font-bold text-lg">${item.name}</h3>
+                                            <p class="text-gray-600">位置: ${item.location}</p>
+                                            <p class="text-gray-600">清洁频率: ${frequencyMap[item.frequency]}</p>
+                                            ${item.notes ? `<p class="text-gray-600">备注: ${item.notes}</p>` : ''}
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button class="edit-item-btn text-blue-500" data-id="${item.id}">编辑</button>
+                                            <button class="delete-item-btn text-red-500" data-id="${item.id}">删除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : `<p class="text-center text-gray-500 py-8">暂无关键物品，请添加</p>`}
+                    <button id="close-items-modal" class="mt-4 bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg w-full">关闭</button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            // 绑定事件
+            document.getElementById('close-items-modal').addEventListener('click', () => modal.remove());
+
+            // 编辑物品
+            modal.querySelectorAll('.edit-item-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const itemId = e.target.dataset.id;
+                    editKeyItem(itemId, modal);
+                });
+            });
+
+            // 删除物品
+            modal.querySelectorAll('.delete-item-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const itemId = e.target.dataset.id;
+                    deleteKeyItem(itemId, modal);
+                });
+            });
+        }
+
+        // 编辑关键物品
+        function editKeyItem(itemId, modal) {
+            const item = keyItems.find(item => item.id === itemId);
+            if (item) {
+                const newName = prompt('请输入新的物品名称:', item.name);
+                const newLocation = prompt('请输入新的位置信息:', item.location);
+                const newFrequency = prompt('请输入新的清洁频率 (daily/weekly/biweekly/monthly/quarterly):', item.frequency);
+                const newNotes = prompt('请输入新的备注:', item.notes);
+
+                if (newName && newLocation) {
+                    item.name = newName.trim();
+                    item.location = newLocation.trim();
+                    item.frequency = newFrequency || item.frequency;
+                    item.notes = newNotes ? newNotes.trim() : '';
+                    saveKeyItems();
+                    modal.remove();
+                    viewKeyItems(); // 重新显示更新后的列表
+                }
+            }
+        }
+
+        // 删除关键物品
+        function deleteKeyItem(itemId, modal) {
+            if (confirm('确定要删除这个物品吗？')) {
+                keyItems = keyItems.filter(item => item.id !== itemId);
+                saveKeyItems();
+                modal.remove();
+                viewKeyItems(); // 重新显示更新后的列表
+            }
+        }
+
         // 设置事件监听器
         function setupEventListeners() {
             // 任务卡片点击
@@ -1065,6 +1619,12 @@
                     switchUser(e.target.value);
                 });
             }
+
+            // 初始化拖拽功能
+            initDragAndDrop();
+            
+            // 初始化关键物品功能
+            initKeyItems();
         }
 
         // 设置可访问性
@@ -1294,6 +1854,16 @@
                     expReward = 150;
                     goldReward = 250;
                     contributionReward = 25;
+                    break;
+                case 4: // 书房
+                    expReward = 50;
+                    goldReward = 100;
+                    contributionReward = 10;
+                    break;
+                case 5: // 阳台
+                    expReward = 75;
+                    goldReward = 150;
+                    contributionReward = 15;
                     break;
                 default:
                     expReward = 50;

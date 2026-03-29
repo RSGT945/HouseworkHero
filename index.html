@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="家务勇者 - 把家务变成游戏闯关，让孩子爱上做家务">
     <meta name="theme-color" content="#4F46E5">
-    <meta name="version" content="1.0.0">
-    <title>家务勇者 V1.0.0 - 把家务变成游戏闯关</title>
+    <meta name="version" content="2.0.0">
+    <title>家务勇者 V2.0.0 - 把家务变成游戏闯关</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
@@ -182,6 +182,32 @@
         .after-clean {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Cg fill='%2393c5fd'%3E%3Crect x='60' y='60' width='80' height='60' rx='5'/%3E%3Crect x='210' y='80' width='100' height='40' rx='5'/%3E%3Crect x='90' y='160' width='130' height='40' rx='5'/%3E%3Crect x='260' y='150' width='60' height='60' rx='5'/%3E%3C/g%3E%3Cg fill='%233b82f6'%3E%3Ccircle cx='100' cy='250' r='25'/%3E%3Ccircle cx='180' cy='260' r='20'/%3E%3Ccircle cx='260' cy='240' r='30'/%3E%3Ccircle cx='330' cy='255' r='15'/%3E%3C/g%3E%3Cg fill='%231e40af'%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' text-anchor='middle'%3E打扫后%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='12' text-anchor='middle'%3E(整洁状态)%3C/text%3E%3C/g%3E%3C/svg%3E");
         }
+        
+        /* 智能推荐样式 */
+        .recommendation-card {
+            transition: all 0.3s ease;
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .recommendation-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -255,6 +281,20 @@
     <main id="main-content" class="container mx-auto px-4 py-6 md:py-8 flex flex-col lg:flex-row gap-6 md:gap-8" role="main">
         <!-- 左侧主操作区 -->
         <div class="w-full lg:w-3/4 bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+            <!-- 智能任务推荐 -->
+            <section class="mb-6 md:mb-8" aria-labelledby="recommendation-heading">
+                <h2 id="recommendation-heading" class="text-xl md:text-2xl font-bold mb-4 text-gray-800">智能任务推荐</h2>
+                <div id="task-recommendations" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 推荐任务将通过JavaScript动态生成 -->
+                    <div class="text-center text-gray-500 py-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        <p>正在分析您的清洁习惯...</p>
+                    </div>
+                </div>
+            </section>
+            
             <!-- 房间任务系统 -->
             <section class="mb-6 md:mb-8" aria-labelledby="task-heading">
                 <h2 id="task-heading" class="text-xl md:text-2xl font-bold mb-4 text-gray-800">选择任务</h2>
@@ -557,6 +597,30 @@
                             <input type="text" id="reminder-content" class="w-full border border-gray-300 rounded-lg px-3 py-3 md:py-2 text-base touch-target" placeholder="例如：客厅任务大扫除时间到啦！" aria-label="输入提醒内容">
                         </div>
                     </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">提醒渠道</label>
+                        <div class="flex flex-wrap gap-3">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="reminder-browser" class="w-4 h-4 text-blue-600 rounded" checked>
+                                <span>浏览器通知</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="reminder-email" class="w-4 h-4 text-blue-600 rounded">
+                                <span>邮件提醒</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="reminder-sound" class="w-4 h-4 text-blue-600 rounded" checked>
+                                <span>声音提醒</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4" id="email-input-section" style="display: none;">
+                        <label for="reminder-email-address" class="block text-sm font-medium text-gray-700 mb-1">邮箱地址</label>
+                        <input type="email" id="reminder-email-address" class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="输入您的邮箱地址" aria-label="输入邮箱地址">
+                    </div>
+                    
                     <button id="set-reminder" class="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-3 md:py-2 rounded-2xl transition font-bold touch-target w-full md:w-auto text-base shadow-md" aria-label="设置清洁提醒">
                         设置清洁提醒
                     </button>
@@ -1148,6 +1212,9 @@
         // 关键物品数据
         let keyItems = [];
 
+        // 任务推荐数据
+        let taskRecommendations = [];
+
         // 初始化拖拽功能
         function initDragAndDrop() {
             const dragItems = document.querySelectorAll('.drag-item');
@@ -1563,6 +1630,175 @@
             }
         }
 
+        // 初始化任务推荐功能
+        function initTaskRecommendations() {
+            // 生成初始推荐
+            generateTaskRecommendations();
+            
+            // 每30秒更新一次推荐
+            setInterval(generateTaskRecommendations, 30000);
+        }
+
+        // 生成任务推荐
+        function generateTaskRecommendations() {
+            const currentUserObj = getCurrentUser();
+            const recommendations = [];
+            
+            // 分析用户习惯
+            const completedTasks = currentUserObj.completedTasks || [];
+            const userLevel = currentUserObj.level || 1;
+            
+            // 基于完成情况推荐
+            userData.tasks.forEach((task, index) => {
+                if (!task.completed) {
+                    // 计算推荐分数
+                    let score = 0;
+                    
+                    // 基础分数
+                    score += 100 - (task.difficulty * 10);
+                    
+                    // 未完成时间（模拟）
+                    const daysSinceLastCompleted = Math.floor(Math.random() * 7) + 1;
+                    score += daysSinceLastCompleted * 5;
+                    
+                    // 用户等级匹配
+                    if (task.difficulty <= userLevel + 1) {
+                        score += 20;
+                    }
+                    
+                    // 最近未完成的任务优先
+                    if (!completedTasks.includes(index)) {
+                        score += 30;
+                    }
+                    
+                    recommendations.push({
+                        task: task,
+                        taskIndex: index,
+                        score: score,
+                        reason: getRecommendationReason(task, daysSinceLastCompleted, userLevel)
+                    });
+                }
+            });
+            
+            // 按分数排序
+            recommendations.sort((a, b) => b.score - a.score);
+            
+            // 取前3个推荐
+            taskRecommendations = recommendations.slice(0, 3);
+            
+            // 更新界面
+            displayTaskRecommendations();
+        }
+
+        // 获取推荐理由
+        function getRecommendationReason(task, daysSinceLastCompleted, userLevel) {
+            if (daysSinceLastCompleted > 3) {
+                return `已${daysSinceLastCompleted}天未清洁`;
+            } else if (task.difficulty <= userLevel) {
+                return `适合当前等级`;
+            } else if (task.difficulty === userLevel + 1) {
+                return `挑战一下自己`;
+            } else {
+                return `保持家居整洁`;
+            }
+        }
+
+        // 显示任务推荐
+        function displayTaskRecommendations() {
+            const container = document.getElementById('task-recommendations');
+            if (!container) return;
+            
+            if (taskRecommendations.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-500 py-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p>所有任务都已完成！</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = taskRecommendations.map((rec, index) => {
+                const task = rec.task;
+                const taskIndex = rec.taskIndex;
+                const difficultyStars = '★'.repeat(task.difficulty);
+                
+                // 根据任务类型设置颜色
+                let bgColor, borderColor, textColor;
+                switch(taskIndex) {
+                    case 0: // 卧室
+                        bgColor = 'bg-pink-50';
+                        borderColor = 'border-pink-200';
+                        textColor = 'text-pink-800';
+                        break;
+                    case 1: // 客厅
+                        bgColor = 'bg-blue-50';
+                        borderColor = 'border-blue-200';
+                        textColor = 'text-blue-800';
+                        break;
+                    case 2: // 卫生间
+                        bgColor = 'bg-green-50';
+                        borderColor = 'border-green-200';
+                        textColor = 'text-green-800';
+                        break;
+                    case 3: // 厨房
+                        bgColor = 'bg-purple-50';
+                        borderColor = 'border-purple-200';
+                        textColor = 'text-purple-800';
+                        break;
+                    case 4: // 书房
+                        bgColor = 'bg-indigo-50';
+                        borderColor = 'border-indigo-200';
+                        textColor = 'text-indigo-800';
+                        break;
+                    case 5: // 阳台
+                        bgColor = 'bg-yellow-50';
+                        borderColor = 'border-yellow-200';
+                        textColor = 'text-yellow-800';
+                        break;
+                    default:
+                        bgColor = 'bg-gray-50';
+                        borderColor = 'border-gray-200';
+                        textColor = 'text-gray-800';
+                }
+                
+                return `
+                    <div class="recommendation-card ${bgColor} ${borderColor} border-2 rounded-2xl p-4 touch-target shadow-md relative" role="button" tabindex="0" onclick="selectCopy(${taskIndex})">
+                        <div class="recommendation-badge">${index + 1}</div>
+                        <div class="flex flex-col items-center text-center">
+                            <h3 class="font-bold text-base md:text-lg mb-1">${task.name}</h3>
+                            <div class="flex mb-2" aria-label="难度${task.difficulty}星">
+                                <span class="star">${difficultyStars}</span>
+                            </div>
+                            <div class="text-xs ${textColor} bg-opacity-30 px-2 py-1 rounded-full inline-block mb-2">${rec.reason}</div>
+                            <button class="bg-blue-400 hover:bg-blue-500 text-white px-3 py-1 rounded-lg text-sm transition" onclick="selectCopy(${taskIndex}); event.stopPropagation();">
+                                选择任务
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 动态调整任务难度
+        function adjustTaskDifficulty() {
+            const currentUserObj = getCurrentUser();
+            const userLevel = currentUserObj.level || 1;
+            
+            // 根据用户等级调整任务难度
+            userData.tasks.forEach(task => {
+                // 基础难度不变，但是根据用户等级提供不同的挑战
+                const baseDifficulty = task.difficulty;
+                
+                // 记录原始难度，用于显示
+                if (!task.originalDifficulty) {
+                    task.originalDifficulty = baseDifficulty;
+                }
+            });
+        }
+
         // 设置事件监听器
         function setupEventListeners() {
             // 任务卡片点击
@@ -1625,6 +1861,12 @@
             
             // 初始化关键物品功能
             initKeyItems();
+            
+            // 初始化任务推荐功能
+            initTaskRecommendations();
+            
+            // 初始化提醒功能
+            initReminder();
         }
 
         // 设置可访问性
@@ -1963,15 +2205,36 @@
             }
         }
 
+        // 初始化提醒功能
+        function initReminder() {
+            const emailCheckbox = document.getElementById('reminder-email');
+            const emailInputSection = document.getElementById('email-input-section');
+            
+            if (emailCheckbox && emailInputSection) {
+                emailCheckbox.addEventListener('change', function() {
+                    emailInputSection.style.display = this.checked ? 'block' : 'none';
+                });
+            }
+        }
+
         // 设置提醒
         function setReminder() {
             const timeInput = document.getElementById('reminder-time');
             const contentInput = document.getElementById('reminder-content');
+            const browserCheckbox = document.getElementById('reminder-browser');
+            const emailCheckbox = document.getElementById('reminder-email');
+            const soundCheckbox = document.getElementById('reminder-sound');
+            const emailAddress = document.getElementById('reminder-email-address');
             
             if (!timeInput || !contentInput) return;
             
             if (!timeInput.value || !contentInput.value) {
                 alert('请填写完整的提醒信息！');
+                return;
+            }
+
+            if (emailCheckbox.checked && (!emailAddress || !emailAddress.value)) {
+                alert('请填写邮箱地址！');
                 return;
             }
 
@@ -1984,24 +2247,49 @@
                 return;
             }
 
-            // 请求通知权限
-            if ('Notification' in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === 'granted') {
-                        setTimeout(() => {
+            // 检查是否至少选择了一个提醒渠道
+            if (!browserCheckbox.checked && !emailCheckbox.checked && !soundCheckbox.checked) {
+                alert('请至少选择一个提醒渠道！');
+                return;
+            }
+
+            // 延迟执行提醒
+            setTimeout(() => {
+                // 浏览器通知
+                if (browserCheckbox.checked && 'Notification' in window) {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
                             new Notification('家务勇者提醒', {
                                 body: contentInput.value,
                                 icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234F46E5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'
                             });
-                        }, timeUntilReminder);
-                        alert('提醒设置成功！');
-                    } else {
-                        alert('请允许通知权限以设置提醒！');
-                    }
-                });
-            } else {
-                alert('您的浏览器不支持通知功能！');
-            }
+                        }
+                    });
+                }
+
+                // 邮件提醒（模拟）
+                if (emailCheckbox.checked && emailAddress.value) {
+                    console.log('发送邮件提醒到:', emailAddress.value);
+                    console.log('邮件内容:', contentInput.value);
+                    // 实际项目中这里会调用邮件发送API
+                }
+
+                // 声音提醒
+                if (soundCheckbox.checked) {
+                    playReminderSound();
+                }
+
+            }, timeUntilReminder);
+
+            alert('提醒设置成功！将在指定时间通过选择的渠道提醒您。');
+        }
+
+        // 播放提醒声音
+        function playReminderSound() {
+            // 创建音频元素
+            const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAD');
+            audio.volume = 0.5;
+            audio.play().catch(e => console.warn('无法播放声音:', e));
         }
 
         // 根据性别设置颜色方案

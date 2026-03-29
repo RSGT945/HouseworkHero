@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家务勇者 - 自动化测试</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Noto Sans SC', sans-serif; }
+        .test-pass { background-color: #10B981; color: white; }
+        .test-fail { background-color: #EF4444; color: white; }
+        .test-pending { background-color: #F59E0B; color: white; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center">家务勇者 - 自动化测试报告</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-bold mb-4">测试概览</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                    <div class="text-3xl font-bold" id="total-tests">0</div>
+                    <div class="text-gray-600">总测试数</div>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <div class="text-3xl font-bold text-green-600" id="passed-tests">0</div>
+                    <div class="text-gray-600">通过</div>
+                </div>
+                <div class="text-center p-4 bg-red-50 rounded-lg">
+                    <div class="text-3xl font-bold text-red-600" id="failed-tests">0</div>
+                    <div class="text-gray-600">失败</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="test-results" class="space-y-4"></div>
+    </div>
+
+    <script>
+        // 测试结果统计
+        let testResults = {
+            total: 0,
+            passed: 0,
+            failed: 0
+        };
+
+        // 测试用例列表
+        const testCases = [
+            // 1. 基础结构测试
+            {
+                name: '页面结构测试',
+                description: '验证页面基本结构是否存在',
+                test: function() {
+                    const tests = [
+                        { name: '顶部导航栏存在', check: () => document.querySelector('header') !== null },
+                        { name: '主内容区存在', check: () => document.querySelector('main') !== null },
+                        { name: '左侧操作区存在', check: () => document.querySelector('.lg\\:w-3\\/4') !== null },
+                        { name: '右侧勇者面板存在', check: () => document.querySelector('.lg\\:w-1\\/4') !== null }
+                    ];
+                    return tests;
+                }
+            },
+
+            // 2. 任务系统测试
+            {
+                name: '任务系统测试',
+                description: '验证任务选择功能',
+                test: function() {
+                    const tests = [
+                        { name: '4个任务卡片存在', check: () => document.querySelectorAll('.hero-card').length === 4 },
+                        { name: '任务卡片可点击', check: () => {
+                            const cards = document.querySelectorAll('.hero-card');
+                            return cards.length > 0 && cards[0].classList.contains('cursor-pointer');
+                        }},
+                        { name: '难度星级显示正确', check: () => {
+                            const stars = document.querySelectorAll('.star');
+                            return stars.length >= 4;
+                        }},
+                        { name: '任务状态标签存在', check: () => {
+                            const cards = document.querySelectorAll('.hero-card');
+                            return cards.length > 0 && cards[0].querySelector('.text-xs') !== null;
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 3. 图片上传测试
+            {
+                name: '图片上传功能测试',
+                description: '验证图片上传相关功能',
+                test: function() {
+                    const tests = [
+                        { name: '打扫前上传按钮存在', check: () => document.getElementById('before-upload') !== null },
+                        { name: '打扫后上传按钮存在', check: () => document.getElementById('after-upload') !== null },
+                        { name: '上传按钮类型正确', check: () => {
+                            const input = document.getElementById('before-upload');
+                            return input && input.type === 'file';
+                        }},
+                        { name: '上传按钮接受图片格式', check: () => {
+                            const input = document.getElementById('before-upload');
+                            return input && input.accept === 'image/*';
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 4. 操作按钮测试
+            {
+                name: '操作按钮测试',
+                description: '验证主要操作按钮',
+                test: function() {
+                    const tests = [
+                        { name: '生成对比图按钮存在', check: () => document.getElementById('generate-compare') !== null },
+                        { name: 'AI识别按钮存在', check: () => document.getElementById('ai-identify') !== null },
+                        { name: '生成对比图按钮文本正确', check: () => {
+                            const btn = document.getElementById('generate-compare');
+                            return btn && btn.textContent.includes('生成对比图');
+                        }},
+                        { name: 'AI识别按钮文本正确', check: () => {
+                            const btn = document.getElementById('ai-identify');
+                            return btn && btn.textContent.includes('AI识别整洁度');
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 5. 勇者面板测试
+            {
+                name: '勇者面板测试',
+                description: '验证勇者面板显示',
+                test: function() {
+                    const tests = [
+                        { name: '勇者形象显示区域存在', check: () => document.querySelector('.rounded-full.w-32') !== null },
+                        { name: '经验条存在', check: () => document.getElementById('exp-bar') !== null },
+                        { name: '等级显示存在', check: () => document.querySelector('.bg-yellow-400') !== null },
+                        { name: '金币显示存在', check: () => {
+                            const goldElements = document.querySelectorAll('.font-bold');
+                            return goldElements.length > 0;
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 6. 提醒功能测试
+            {
+                name: '智能提醒功能测试',
+                description: '验证提醒设置功能',
+                test: function() {
+                    const tests = [
+                        { name: '提醒时间输入框存在', check: () => document.getElementById('reminder-time') !== null },
+                        { name: '提醒内容输入框存在', check: () => document.getElementById('reminder-content') !== null },
+                        { name: '设置提醒按钮存在', check: () => document.getElementById('set-reminder') !== null },
+                        { name: '时间输入框类型正确', check: () => {
+                            const input = document.getElementById('reminder-time');
+                            return input && input.type === 'datetime-local';
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 7. 数据存储测试
+            {
+                name: '数据存储测试',
+                description: '验证localStorage功能',
+                test: function() {
+                    const tests = [
+                        { name: 'localStorage可用', check: () => typeof(Storage) !== 'undefined' },
+                        { name: '可以存储数据', check: () => {
+                            try {
+                                localStorage.setItem('test', 'value');
+                                const value = localStorage.getItem('test');
+                                localStorage.removeItem('test');
+                                return value === 'value';
+                            } catch (e) {
+                                return false;
+                            }
+                        }},
+                        { name: '可以删除数据', check: () => {
+                            try {
+                                localStorage.setItem('test', 'value');
+                                localStorage.removeItem('test');
+                                return localStorage.getItem('test') === null;
+                            } catch (e) {
+                                return false;
+                            }
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 8. 响应式设计测试
+            {
+                name: '响应式设计测试',
+                description: '验证响应式布局',
+                test: function() {
+                    const tests = [
+                        { name: '视口meta标签存在', check: () => {
+                            const meta = document.querySelector('meta[name="viewport"]');
+                            return meta !== null;
+                        }},
+                        { name: 'Tailwind CSS已加载', check: () => {
+                            // 检查是否有Tailwind相关的类名
+                            const elements = document.querySelectorAll('[class*="container"], [class*="flex"], [class*="grid"]');
+                            return elements.length > 0;
+                        }},
+                        { name: '响应式断点类存在', check: () => {
+                            const elements = document.querySelectorAll('[class*="lg:"], [class*="md:"]');
+                            return elements.length > 0;
+                        }}
+                    ];
+                    return tests;
+                }
+            },
+
+            // 9. JavaScript功能测试
+            {
+                name: 'JavaScript功能测试',
+                description: '验证核心JavaScript功能',
+                test: function() {
+                    const tests = [
+                        { name: 'init函数存在', check: () => typeof init === 'function' },
+                        { name: 'updateHeroPanel函数存在', check: () => typeof updateHeroPanel === 'function' },
+                        { name: 'selectCopy函数存在', check: () => typeof selectCopy === 'function' },
+                        { name: 'startAIIdentify函数存在', check: () => typeof startAIIdentify === 'function' }
+                    ];
+                    return tests;
+                }
+            },
+
+            // 10. 动画效果测试
+            {
+                name: '动画效果测试',
+                description: '验证CSS动画',
+                test: function() {
+                    const tests = [
+                        { name: '加载动画样式存在', check: () => {
+                            const styles = document.styleSheets;
+                            for (let sheet of styles) {
+                                try {
+                                    for (let rule of sheet.cssRules) {
+                                        if (rule.cssText && rule.cssText.includes('loading-animation')) {
+                                            return true;
+                                        }
+                                    }
+                                } catch (e) {}
+                            }
+                            return document.querySelector('.loading-animation') !== null;
+                        }},
+                        { name: '升级动画样式存在', check: () => {
+                            const styles = document.styleSheets;
+                            for (let sheet of styles) {
+                                try {
+                                    for (let rule of sheet.cssRules) {
+                                        if (rule.cssText && rule.cssText.includes('level-up-animation')) {
+                                            return true;
+                                        }
+                                    }
+                                } catch (e) {}
+                            }
+                            return document.querySelector('.level-up-animation') !== null;
+                        }},
+                        { name: '奖励动画样式存在', check: () => {
+                            const styles = document.styleSheets;
+                            for (let sheet of styles) {
+                                try {
+                                    for (let rule of sheet.cssRules) {
+                                        if (rule.cssText && rule.cssText.includes('reward-animation')) {
+                                            return true;
+                                        }
+                                    }
+                                } catch (e) {}
+                            }
+                            return document.querySelector('.reward-animation') !== null;
+                        }}
+                    ];
+                    return tests;
+                }
+            }
+        ];
+
+        // 执行测试
+        function runTests() {
+            const resultsContainer = document.getElementById('test-results');
+            
+            testCases.forEach(testCase => {
+                const tests = testCase.test();
+                const testGroup = document.createElement('div');
+                testGroup.className = 'bg-white rounded-lg shadow-lg p-6';
+                
+                let groupHTML = `
+                    <h3 class="text-lg font-bold mb-2">${testCase.name}</h3>
+                    <p class="text-gray-600 mb-4">${testCase.description}</p>
+                    <div class="space-y-2">
+                `;
+                
+                tests.forEach(test => {
+                    testResults.total++;
+                    let passed = false;
+                    let error = null;
+                    
+                    try {
+                        passed = test.check();
+                    } catch (e) {
+                        error = e.message;
+                        passed = false;
+                    }
+                    
+                    if (passed) {
+                        testResults.passed++;
+                    } else {
+                        testResults.failed++;
+                    }
+                    
+                    groupHTML += `
+                        <div class="flex items-center justify-between p-3 rounded-lg ${passed ? 'test-pass' : 'test-fail'}">
+                            <span>${test.name}</span>
+                            <span class="font-bold">${passed ? '通过' : '失败'}</span>
+                        </div>
+                    `;
+                });
+                
+                groupHTML += '</div>';
+                testGroup.innerHTML = groupHTML;
+                resultsContainer.appendChild(testGroup);
+            });
+            
+            // 更新统计
+            document.getElementById('total-tests').textContent = testResults.total;
+            document.getElementById('passed-tests').textContent = testResults.passed;
+            document.getElementById('failed-tests').textContent = testResults.failed;
+        }
+
+        // 页面加载完成后执行测试
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>

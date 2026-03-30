@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="家务勇者 - 家庭中心">
+    <meta name="theme-color" content="#4F46E5">
+    <title>家务勇者 - 家庭中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body class="min-h-screen">
+    <header class="main-header text-white shadow-lg" role="banner">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="index.html" class="px-2 py-1 rounded-lg hover:bg-white hover:bg-opacity-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="text-xl md:text-2xl font-bold">家庭中心</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="px-3 py-2 rounded-lg">首页</a>
+                    <a href="hero-center.html" class="px-3 py-2 rounded-lg">勇者</a>
+                    <a href="family-center.html" class="px-3 py-2 rounded-lg active">家庭</a>
+                    <a href="share-center.html" class="px-3 py-2 rounded-lg">分享</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 py-6 md:py-8 page-content" role="main">
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-800">家庭成员</h2>
+                    <button id="add-member-btn" class="bg-pink-400 hover:bg-pink-500 text-white px-4 py-2 rounded-lg transition touch-target text-sm">
+                        添加成员
+                    </button>
+                </div>
+                <div id="members-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">家庭排行榜</h2>
+                <div id="leaderboard-list" class="space-y-3">
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">卫生记录</h2>
+                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">日期范围</label>
+                        <div class="flex space-x-2">
+                            <input type="date" id="date-from" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                            <input type="date" id="date-to" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">房间类型</label>
+                        <select id="history-room" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                            <option value="all">全部</option>
+                            <option value="bedroom">卧室</option>
+                            <option value="living-room">客厅</option>
+                            <option value="bathroom">卫生间</option>
+                            <option value="kitchen">厨房</option>
+                            <option value="study">书房</option>
+                            <option value="balcony">阳台</option>
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">成员</label>
+                        <select id="history-user" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                            <option value="all">全部</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="filter-history" class="bg-blue-400 hover:bg-blue-500 text-white px-6 py-3 rounded-2xl transition font-bold touch-target w-full md:w-auto text-base shadow-md mb-4">
+                    筛选记录
+                </button>
+                <div id="cleaning-history-list" class="max-h-64 overflow-y-auto border border-gray-200 rounded-lg p-4">
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无清洁记录</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">数据统计分析</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-3 text-gray-700">清洁频率统计</h3>
+                        <div class="h-64">
+                            <canvas id="frequency-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-3 text-gray-700">清洁时长统计</h3>
+                        <div class="h-64">
+                            <canvas id="duration-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">互动激励</h2>
+                <div class="flex flex-col sm:flex-row gap-4 mb-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">选择成员</label>
+                        <select id="praise-user" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                        </select>
+                    </div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">表扬内容</label>
+                        <select id="praise-content" class="w-full border border-gray-300 rounded-lg px-3 py-2 touch-target">
+                            <option value="clean">打扫得真干净！</option>
+                            <option value="fast">速度真快！</option>
+                            <option value="thorough">打扫得真仔细！</option>
+                            <option value="creative">方法真有创意！</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="send-praise" class="bg-green-400 hover:bg-green-500 text-white px-6 py-3 rounded-2xl transition font-bold touch-target w-full md:w-auto text-base shadow-md">
+                    发送表扬
+                </button>
+                <div id="praise-list" class="mt-4 max-h-40 overflow-y-auto border border-gray-200 rounded-lg p-4">
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无表扬记录</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav md:hidden">
+        <div class="flex justify-around py-2">
+            <a href="index.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-xs mt-1">首页</span>
+            </a>
+            <a href="hero-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <span class="text-xs mt-1">勇者</span>
+            </a>
+            <a href="family-center.html" class="flex flex-col items-center py-2 px-3 active">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="text-xs mt-1">家庭</span>
+            </a>
+            <a href="share-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span class="text-xs mt-1">分享</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js/shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            updateFamilyCenter();
+            updateMemberSelects();
+            initCharts();
+            
+            document.getElementById('add-member-btn').addEventListener('click', function() {
+                const memberName = prompt('请输入家庭成员姓名:');
+                if (memberName && memberName.trim()) {
+                    addFamilyMember(memberName.trim());
+                }
+            });
+            
+            document.getElementById('filter-history').addEventListener('click', function() {
+                filterCleaningHistory();
+            });
+            
+            document.getElementById('send-praise').addEventListener('click', function() {
+                sendPraise();
+            });
+        });
+        
+        function addFamilyMember(name) {
+            familyMembers.push({
+                name: name,
+                level: 1,
+                experience: 0,
+                cleaningCount: 0,
+                totalDuration: 0
+            });
+            saveToLocalStorage();
+            updateFamilyCenter();
+            updateMemberSelects();
+        }
+        
+        function updateFamilyCenter() {
+            updateMembersList();
+            updateLeaderboard();
+            updateCleaningHistory();
+            updatePraiseList();
+        }
+        
+        function updateMembersList() {
+            const membersList = document.getElementById('members-list');
+            membersList.innerHTML = '';
+            
+            familyMembers.forEach((member, index) => {
+                const memberCard = document.createElement('div');
+                memberCard.className = 'bg-gray-50 rounded-lg p-4 border border-gray-200';
+                memberCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-gray-800">${member.name}</h3>
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Lv.${member.level}</span>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <p>清洁次数: ${member.cleaningCount}</p>
+                        <p>总时长: ${formatDuration(member.totalDuration)}</p>
+                        <p>经验值: ${member.experience}</p>
+                    </div>
+                    <div class="mt-3">
+                        <button class="text-xs text-red-500 hover:text-red-700" onclick="removeFamilyMember(${index})">
+                            删除成员
+                        </button>
+                    </div>
+                `;
+                membersList.appendChild(memberCard);
+            });
+        }
+        
+        function removeFamilyMember(index) {
+            if (confirm('确定要删除这个家庭成员吗？')) {
+                familyMembers.splice(index, 1);
+                saveToLocalStorage();
+                updateFamilyCenter();
+                updateMemberSelects();
+            }
+        }
+        
+        function updateLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboard-list');
+            leaderboardList.innerHTML = '';
+            
+            const sortedMembers = [...familyMembers].sort((a, b) => b.experience - a.experience);
+            
+            sortedMembers.forEach((member, index) => {
+                const rankItem = document.createElement('div');
+                rankItem.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200';
+                
+                let rankClass = '';
+                if (index === 0) rankClass = 'bg-yellow-400 text-white';
+                else if (index === 1) rankClass = 'bg-gray-300 text-gray-800';
+                else if (index === 2) rankClass = 'bg-amber-700 text-white';
+                else rankClass = 'bg-gray-200 text-gray-600';
+                
+                rankItem.innerHTML = `
+                    <div class="flex items-center">
+                        <span class="w-8 h-8 rounded-full ${rankClass} flex items-center justify-center font-bold mr-3">
+                            ${index + 1}
+                        </span>
+                        <div>
+                            <h4 class="font-medium">${member.name}</h4>
+                            <p class="text-xs text-gray-500">经验值: ${member.experience}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold">Lv.${member.level}</p>
+                        <p class="text-xs text-gray-500">${member.cleaningCount}次</p>
+                    </div>
+                `;
+                leaderboardList.appendChild(rankItem);
+            });
+        }
+        
+        function updateCleaningHistory() {
+            const historyList = document.getElementById('cleaning-history-list');
+            
+            if (cleaningHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无清洁记录</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = '';
+            
+            cleaningHistory.slice(-10).reverse().forEach(record => {
+                const recordItem = document.createElement('div');
+                recordItem.className = 'p-3 border-b border-gray-100 last:border-b-0';
+                recordItem.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-medium">${record.roomName}</h4>
+                            <p class="text-xs text-gray-500">${record.userName} · ${formatDate(record.timestamp)} · ${formatDuration(record.duration)}</p>
+                        </div>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">已完成</span>
+                    </div>
+                `;
+                historyList.appendChild(recordItem);
+            });
+        }
+        
+        function filterCleaningHistory() {
+            const dateFrom = document.getElementById('date-from').value;
+            const dateTo = document.getElementById('date-to').value;
+            const room = document.getElementById('history-room').value;
+            const user = document.getElementById('history-user').value;
+            
+            const filtered = cleaningHistory.filter(record => {
+                const recordDate = new Date(record.timestamp).toISOString().split('T')[0];
+                const matchesDate = (!dateFrom || recordDate >= dateFrom) && (!dateTo || recordDate <= dateTo);
+                const matchesRoom = room === 'all' || record.roomId === room;
+                const matchesUser = user === 'all' || record.userName === user;
+                return matchesDate && matchesRoom && matchesUser;
+            });
+            
+            const historyList = document.getElementById('cleaning-history-list');
+            
+            if (filtered.length === 0) {
+                historyList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>没有符合条件的记录</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = '';
+            
+            filtered.slice(-10).reverse().forEach(record => {
+                const recordItem = document.createElement('div');
+                recordItem.className = 'p-3 border-b border-gray-100 last:border-b-0';
+                recordItem.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-medium">${record.roomName}</h4>
+                            <p class="text-xs text-gray-500">${record.userName} · ${formatDate(record.timestamp)} · ${formatDuration(record.duration)}</p>
+                        </div>
+                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">已完成</span>
+                    </div>
+                `;
+                historyList.appendChild(recordItem);
+            });
+        }
+        
+        function updateMemberSelects() {
+            const historyUserSelect = document.getElementById('history-user');
+            const praiseUserSelect = document.getElementById('praise-user');
+            
+            // 清空现有选项
+            historyUserSelect.innerHTML = '<option value="all">全部</option>';
+            praiseUserSelect.innerHTML = '';
+            
+            familyMembers.forEach(member => {
+                const historyOption = document.createElement('option');
+                historyOption.value = member.name;
+                historyOption.textContent = member.name;
+                historyUserSelect.appendChild(historyOption);
+                
+                const praiseOption = document.createElement('option');
+                praiseOption.value = member.name;
+                praiseOption.textContent = member.name;
+                praiseUserSelect.appendChild(praiseOption);
+            });
+        }
+        
+        function initCharts() {
+            initFrequencyChart();
+            initDurationChart();
+        }
+        
+        function initFrequencyChart() {
+            const ctx = document.getElementById('frequency-chart').getContext('2d');
+            
+            const roomCounts = {};
+            cleaningHistory.forEach(record => {
+                if (roomCounts[record.roomName]) {
+                    roomCounts[record.roomName]++;
+                } else {
+                    roomCounts[record.roomName] = 1;
+                }
+            });
+            
+            const labels = Object.keys(roomCounts);
+            const data = Object.values(roomCounts);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '清洁次数',
+                        data: data,
+                        backgroundColor: 'rgba(79, 70, 229, 0.6)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function initDurationChart() {
+            const ctx = document.getElementById('duration-chart').getContext('2d');
+            
+            const roomDurations = {};
+            cleaningHistory.forEach(record => {
+                if (roomDurations[record.roomName]) {
+                    roomDurations[record.roomName] += record.duration;
+                } else {
+                    roomDurations[record.roomName] = record.duration;
+                }
+            });
+            
+            const labels = Object.keys(roomDurations);
+            const data = Object.values(roomDurations).map(d => d / 60); // 转换为分钟
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            'rgba(79, 70, 229, 0.6)',
+                            'rgba(236, 72, 153, 0.6)',
+                            'rgba(16, 185, 129, 0.6)',
+                            'rgba(245, 158, 11, 0.6)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(139, 92, 246, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(79, 70, 229, 1)',
+                            'rgba(236, 72, 153, 1)',
+                            'rgba(16, 185, 129, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(139, 92, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function sendPraise() {
+            const userName = document.getElementById('praise-user').value;
+            const praiseContent = document.getElementById('praise-content').value;
+            
+            if (!userName) {
+                alert('请选择要表扬的成员');
+                return;
+            }
+            
+            const praiseMessage = {
+                id: Date.now(),
+                userName: userName,
+                content: document.getElementById('praise-content').options[document.getElementById('praise-content').selectedIndex].text,
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!praises) {
+                praises = [];
+            }
+            
+            praises.push(praiseMessage);
+            saveToLocalStorage();
+            updatePraiseList();
+            
+            alert('表扬已发送！');
+        }
+        
+        function updatePraiseList() {
+            const praiseList = document.getElementById('praise-list');
+            
+            if (!praises || praises.length === 0) {
+                praiseList.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无表扬记录</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            praiseList.innerHTML = '';
+            
+            praises.slice(-10).reverse().forEach(praise => {
+                const praiseItem = document.createElement('div');
+                praiseItem.className = 'p-3 border-b border-gray-100 last:border-b-0';
+                praiseItem.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="mr-3 text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium">${praise.content}</p>
+                            <p class="text-xs text-gray-500">给 ${praise.userName} · ${formatDate(praise.timestamp)}</p>
+                        </div>
+                    </div>
+                `;
+                praiseList.appendChild(praiseItem);
+            });
+        }
+        
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+        }
+        
+        function formatDuration(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}分${secs}秒`;
+        }
+    </script>
+</body>
+</html>

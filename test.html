@@ -134,30 +134,12 @@
                 description: '验证勇者面板显示',
                 test: function() {
                     const tests = [
-                        { name: '勇者形象显示区域存在', check: () => document.querySelector('.rounded-full.w-32') !== null },
-                        { name: '经验条存在', check: () => document.getElementById('exp-bar') !== null },
+                        { name: '勇者形象显示区域存在', check: () => document.querySelector('.w-24.h-24.bg-gradient-to-br.from-pink-400.to-purple-400.rounded-full') !== null },
+                        { name: '经验条存在', check: () => document.querySelector('.bg-gradient-to-r.from-pink-400.to-purple-400') !== null },
                         { name: '等级显示存在', check: () => document.querySelector('.bg-yellow-400') !== null },
                         { name: '金币显示存在', check: () => {
-                            const goldElements = document.querySelectorAll('.font-bold');
+                            const goldElements = document.querySelectorAll('.text-blue-500');
                             return goldElements.length > 0;
-                        }}
-                    ];
-                    return tests;
-                }
-            },
-
-            // 6. 提醒功能测试
-            {
-                name: '智能提醒功能测试',
-                description: '验证提醒设置功能',
-                test: function() {
-                    const tests = [
-                        { name: '提醒时间输入框存在', check: () => document.getElementById('reminder-time') !== null },
-                        { name: '提醒内容输入框存在', check: () => document.getElementById('reminder-content') !== null },
-                        { name: '设置提醒按钮存在', check: () => document.getElementById('set-reminder') !== null },
-                        { name: '时间输入框类型正确', check: () => {
-                            const input = document.getElementById('reminder-time');
-                            return input && input.type === 'datetime-local';
                         }}
                     ];
                     return tests;
@@ -225,10 +207,10 @@
                 description: '验证核心JavaScript功能',
                 test: function() {
                     const tests = [
-                        { name: 'init函数存在', check: () => typeof init === 'function' },
-                        { name: 'updateHeroPanel函数存在', check: () => typeof updateHeroPanel === 'function' },
-                        { name: 'selectCopy函数存在', check: () => typeof selectCopy === 'function' },
-                        { name: 'startAIIdentify函数存在', check: () => typeof startAIIdentify === 'function' }
+                        { name: 'initializeApp函数存在', check: () => typeof initializeApp === 'function' },
+                        { name: 'updateUI函数存在', check: () => typeof updateUI === 'function' },
+                        { name: 'saveToLocalStorage函数存在', check: () => typeof saveToLocalStorage === 'function' },
+                        { name: 'aiIdentify函数存在', check: () => typeof aiIdentify === 'function' }
                     ];
                     return tests;
                 }

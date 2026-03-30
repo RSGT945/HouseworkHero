@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #fce4ec 0%, #e1bee7 100%);
+    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* 触控优化 */
+.touch-target {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.hero-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.hero-card:active {
+    transform: scale(0.95);
+}
+
+.level-up-animation {
+    animation: levelUp 1s ease-in-out;
+}
+
+@keyframes levelUp {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.reward-animation {
+    animation: reward 0.5s ease-in-out;
+}
+
+@keyframes reward {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.loading-animation {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.star {
+    color: #FFD700;
+}
+
+/* 性别选择按钮样式 */
+.gender-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.gender-btn:hover {
+    transform: scale(1.1);
+}
+
+.gender-btn.active {
+    transform: scale(1.15);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* 响应式优化 */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .hero-card {
+        padding: 1rem;
+    }
+    
+    .text-2xl {
+        font-size: 1.25rem;
+    }
+    
+    .text-xl {
+        font-size: 1.125rem;
+    }
+    
+    /* 性别选择器调整 */
+    #gender-select {
+        width: 100%;
+    }
+    
+    /* 按钮调整 */
+    button {
+        font-size: 0.9rem;
+    }
+    
+    /* 任务卡片调整 */
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 可访问性优化 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 焦点样式 */
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid #4F46E5;
+    outline-offset: 2px;
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* 图片懒加载占位 */
+img[loading="lazy"] {
+    background-color: #f3f4f6;
+}
+
+/* 模拟图片样式 */
+.mock-image {
+    background-size: cover;
+    background-position: center;
+}
+
+/* 清洁前后SVG背景 */
+.before-clean {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Cg fill='%23d1d5db'%3E%3Crect x='50' y='50' width='100' height='80' rx='5'/%3E%3Crect x='200' y='70' width='120' height='60' rx='5'/%3E%3Crect x='80' y='150' width='150' height='60' rx='5'/%3E%3Crect x='250' y='140' width='80' height='80' rx='5'/%3E%3Ccircle cx='100' cy='250' r='30'/%3E%3Ccircle cx='180' cy='260' r='25'/%3E%3Ccircle cx='260' cy='240' r='35'/%3E%3Ccircle cx='330' cy='255' r='20'/%3E%3C/g%3E%3Cg fill='%239ca3af'%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' text-anchor='middle'%3E打扫前%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='12' text-anchor='middle'%3E(杂乱状态)%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+.after-clean {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Cg fill='%2393c5fd'%3E%3Crect x='60' y='60' width='80' height='60' rx='5'/%3E%3Crect x='210' y='80' width='100' height='40' rx='5'/%3E%3Crect x='90' y='160' width='130' height='40' rx='5'/%3E%3Crect x='260' y='150' width='60' height='60' rx='5'/%3E%3C/g%3E%3Cg fill='%233b82f6'%3E%3Ccircle cx='100' cy='250' r='25'/%3E%3Ccircle cx='180' cy='260' r='20'/%3E%3Ccircle cx='260' cy='240' r='30'/%3E%3Ccircle cx='330' cy='255' r='15'/%3E%3C/g%3E%3Cg fill='%231e40af'%3E%3Ctext x='200' y='150' font-family='Arial' font-size='16' text-anchor='middle'%3E打扫后%3C/text%3E%3Ctext x='200' y='170' font-family='Arial' font-size='12' text-anchor='middle'%3E(整洁状态)%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 智能推荐样式 */
+.recommendation-card {
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.recommendation-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 装备系统样式 */
+.equipment-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.equipment-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.equipment-item.equipped {
+    border: 2px solid #f59e0b;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+
+/* 成就系统样式 */
+.achievement-item {
+    transition: all 0.3s ease;
+}
+
+.achievement-item.locked {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.achievement-item.unlocked {
+    animation: unlock 1s ease-in-out;
+}
+
+@keyframes unlock {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 技能系统样式 */
+.skill-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+}
+
+.skill-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.skill-tree {
+    position: relative;
+}
+
+.skill-connector {
+    position: absolute;
+    background-color: #d1d5db;
+    z-index: -1;
+}
+
+.skill-connector.active {
+    background-color: #3b82f6;
+}
+
+/* 顶部导航栏 */
+.main-header {
+    background: linear-gradient(to right, #f472b6, #c084fc);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.main-header a {
+    transition: all 0.2s ease;
+}
+
+.main-header a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.main-header a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: bold;
+}
+
+/* 底部导航栏（移动端） */
+.bottom-nav {
+    background: white;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+}
+
+.bottom-nav a {
+    transition: all 0.2s ease;
+}
+
+.bottom-nav a:hover {
+    background-color: #f3f4f6;
+}
+
+.bottom-nav a.active {
+    color: #ec4899;
+}
+
+/* 页面内容区域 */
+.page-content {
+    padding-bottom: 80px;
+}

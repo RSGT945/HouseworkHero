@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="家务勇者 - 勇者中心">
+    <meta name="theme-color" content="#4F46E5">
+    <title>家务勇者 - 勇者中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body class="min-h-screen">
+    <header class="main-header text-white shadow-lg" role="banner">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="index.html" class="px-2 py-1 rounded-lg hover:bg-white hover:bg-opacity-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="text-xl md:text-2xl font-bold">勇者中心</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="px-3 py-2 rounded-lg">首页</a>
+                    <a href="hero-center.html" class="px-3 py-2 rounded-lg active">勇者</a>
+                    <a href="family-center.html" class="px-3 py-2 rounded-lg">家庭</a>
+                    <a href="share-center.html" class="px-3 py-2 rounded-lg">分享</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 py-6 md:py-8 page-content" role="main">
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">勇者信息</h2>
+                <div class="flex flex-col items-center text-center mb-4">
+                    <div class="w-24 h-24 bg-gradient-to-br from-pink-400 to-purple-400 rounded-full flex items-center justify-center mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-1">家务勇者</h3>
+                    <p class="text-sm text-gray-600 mb-3" id="hero-title">见习家务勇者</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                        <div id="exp-bar" class="bg-gradient-to-r from-pink-400 to-purple-400 h-2.5 rounded-full" style="width: 20%"></div>
+                    </div>
+                    <p class="text-xs text-gray-600" id="exp-text">经验值: 20/100</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-pink-50 rounded-lg p-3 text-center">
+                        <div class="text-sm text-gray-600 mb-1">清洁次数</div>
+                        <div class="text-xl font-bold text-pink-500" id="clean-count">0</div>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-3 text-center">
+                        <div class="text-sm text-gray-600 mb-1">总时长</div>
+                        <div class="text-xl font-bold text-purple-500" id="total-time">0分钟</div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <div class="text-sm text-gray-600 mb-1">获得金币</div>
+                        <div class="text-xl font-bold text-blue-500" id="gold-count">0</div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                        <div class="text-sm text-gray-600 mb-1">成就点数</div>
+                        <div class="text-xl font-bold text-green-500" id="achievement-points">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">装备系统</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="equipment-item border-2 border-gray-200 rounded-lg p-3 text-center">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium">清洁帽子</p>
+                        <p class="text-xs text-gray-600">+5%清洁速度</p>
+                    </div>
+                    <div class="equipment-item border-2 border-gray-200 rounded-lg p-3 text-center">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7l5 5 5-5m0 0v16M0 16l10 5 10-5" />
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium">清洁制服</p>
+                        <p class="text-xs text-gray-600">+10%经验获取</p>
+                    </div>
+                    <div class="equipment-item border-2 border-gray-200 rounded-lg p-3 text-center">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium">清洁手套</p>
+                        <p class="text-xs text-gray-600">+15%清洁效果</p>
+                    </div>
+                    <div class="equipment-item border-2 border-gray-200 rounded-lg p-3 text-center">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium">清洁鞋</p>
+                        <p class="text-xs text-gray-600">+8%移动速度</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">成就系统</h2>
+                <div class="space-y-3" id="achievements-list">
+                    <div class="achievement-item border-2 border-gray-200 rounded-lg p-3 flex items-center">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium">初次清洁</p>
+                            <p class="text-xs text-gray-600">完成第一次清洁任务</p>
+                        </div>
+                        <div class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">已解锁</div>
+                    </div>
+                    <div class="achievement-item border-2 border-gray-200 rounded-lg p-3 flex items-center locked">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium">清洁达人</p>
+                            <p class="text-xs text-gray-600">完成10次清洁任务</p>
+                        </div>
+                        <div class="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs">未解锁</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">技能系统</h2>
+                <div class="skill-tree relative" id="skills-list">
+                    <div class="skill-item border-2 border-blue-200 bg-blue-50 rounded-lg p-3 mb-4">
+                        <h3 class="font-medium mb-2">快速清洁</h3>
+                        <p class="text-xs text-gray-600 mb-2">清洁速度 +10%</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600">已解锁</p>
+                    </div>
+                    <div class="skill-item border-2 border-gray-200 rounded-lg p-3 mb-4 locked">
+                        <h3 class="font-medium mb-2">深度清洁</h3>
+                        <p class="text-xs text-gray-600 mb-2">清洁效果 +15%</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="bg-gray-500 h-2 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600">需要等级 2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav md:hidden">
+        <div class="flex justify-around py-2">
+            <a href="index.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-xs mt-1">首页</span>
+            </a>
+            <a href="hero-center.html" class="flex flex-col items-center py-2 px-3 active">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <span class="text-xs mt-1">勇者</span>
+            </a>
+            <a href="family-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="text-xs mt-1">家庭</span>
+            </a>
+            <a href="share-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span class="text-xs mt-1">分享</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js/shared.js"></script>
+    <script>
+        function updateUI() {
+            const user = familyMembers.find(m => m.id === currentUser);
+            if (user) {
+                document.getElementById('exp-bar').style.width = `${(user.experience / 100) * 100}%`;
+                document.getElementById('exp-text').textContent = `经验值: ${user.experience}/100`;
+                document.getElementById('clean-count').textContent = user.contribution;
+                document.getElementById('gold-count').textContent = user.contribution * 10;
+                document.getElementById('achievement-points').textContent = achievements.filter(a => a.unlocked).length;
+
+                const titles = ['见习家务勇者', '初级家务勇者', '中级家务勇者', '高级家务勇者', '家务大师'];
+                const titleIndex = Math.min(Math.floor(user.level / 2), titles.length - 1);
+                document.getElementById('hero-title').textContent = titles[titleIndex];
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            updateUI();
+        });
+    </script>
+</body>
+</html>

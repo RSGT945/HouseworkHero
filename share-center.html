@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="家务勇者 - 社交分享中心">
+    <meta name="theme-color" content="#4F46E5">
+    <title>家务勇者 - 社交分享中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body class="min-h-screen">
+    <header class="main-header text-white shadow-lg" role="banner">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <a href="index.html" class="px-2 py-1 rounded-lg hover:bg-white hover:bg-opacity-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                    </a>
+                    <div class="text-xl md:text-2xl font-bold">社交分享</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="px-3 py-2 rounded-lg">首页</a>
+                    <a href="hero-center.html" class="px-3 py-2 rounded-lg">勇者</a>
+                    <a href="family-center.html" class="px-3 py-2 rounded-lg">家庭</a>
+                    <a href="share-center.html" class="px-3 py-2 rounded-lg active">分享</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 py-6 md:py-8 page-content" role="main">
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">成就分享</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-3 text-gray-700">最近成就</h3>
+                        <div id="recent-achievements" class="space-y-3">
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+                                <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" fill="none" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">初次清洁</h4>
+                                    <p class="text-xs text-gray-500">完成第一次清洁任务</p>
+                                </div>
+                                <button class="ml-auto text-blue-500 hover:text-blue-700" onclick="shareAchievement('初次清洁')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-3 text-gray-700">分享到社交平台</h3>
+                        <div class="space-y-3">
+                            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                </svg>
+                                分享到微信
+                            </button>
+                            <button class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                分享到QQ
+                            </button>
+                            <button class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3.217 15.64c-.18.25-.434.36-.717.36s-.538-.11-.717-.36l-2.5-3.571-2.5 3.571c-.18.25-.434.36-.717.36s-.538-.11-.717-.36c-.18-.25-.278-.582-.278-.943s.098-.693.278-.943l3.217-4.571c.18-.25.434-.36.717-.36s.538.11.717.36l3.217 4.571c.18.25.278.582.278.943s-.098.693-.278.943z"/>
+                                </svg>
+                                分享到微博
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">清洁记录分享</h2>
+                <div id="shareable-records" class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h3 class="font-medium">客厅清洁</h3>
+                                <p class="text-xs text-gray-500">2024/01/15 · 25分钟</p>
+                            </div>
+                            <button class="text-blue-500 hover:text-blue-700" onclick="shareRecord(0)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                                <span class="text-gray-400 text-sm">清洁前</span>
+                            </div>
+                            <div class="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                                <span class="text-gray-400 text-sm">清洁后</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button id="generate-share-card" class="bg-purple-400 hover:bg-purple-500 text-white px-6 py-3 rounded-2xl transition font-bold touch-target w-full md:w-auto text-base shadow-md">
+                        生成分享卡片
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">好友互动</h2>
+                <div class="mb-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <input type="text" id="friend-code" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 touch-target" placeholder="输入好友邀请码">
+                        <button id="add-friend" class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition">
+                            添加
+                        </button>
+                    </div>
+                    <div class="text-xs text-gray-500">
+                        我的邀请码: <span id="my-invite-code" class="font-medium">HOUSE123</span>
+                    </div>
+                </div>
+                <div id="friends-list" class="space-y-3">
+                    <div class="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <span class="font-medium text-blue-600">张</span>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-medium">张三</h4>
+                            <p class="text-xs text-gray-500">Lv.5 · 23次清洁</p>
+                        </div>
+                        <button class="text-green-500 hover:text-green-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">全国排行榜</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-500">排名</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-500">用户</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-500">等级</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-500">清洁次数</th>
+                                <th class="py-3 px-4 text-left text-sm font-medium text-gray-500">总时长</th>
+                            </tr>
+                        </thead>
+                        <tbody id="national-leaderboard">
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4">
+                                    <span class="w-6 h-6 rounded-full bg-yellow-400 text-white flex items-center justify-center font-bold text-xs">1</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mr-2">
+                                            <span class="font-medium text-red-600 text-xs">李</span>
+                                        </div>
+                                        <span>李勇敢</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">Lv.12</td>
+                                <td class="py-3 px-4">156</td>
+                                <td class="py-3 px-4">12小时30分</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4">
+                                    <span class="w-6 h-6 rounded-full bg-gray-300 text-gray-800 flex items-center justify-center font-bold text-xs">2</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                            <span class="font-medium text-blue-600 text-xs">王</span>
+                                        </div>
+                                        <span>王清洁</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">Lv.10</td>
+                                <td class="py-3 px-4">128</td>
+                                <td class="py-3 px-4">10小时15分</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="py-3 px-4">
+                                    <span class="w-6 h-6 rounded-full bg-amber-700 text-white flex items-center justify-center font-bold text-xs">3</span>
+                                </td>
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                                            <span class="font-medium text-green-600 text-xs">张</span>
+                                        </div>
+                                        <span>张干净</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4">Lv.9</td>
+                                <td class="py-3 px-4">95</td>
+                                <td class="py-3 px-4">8小时45分</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-center">
+                    <button id="refresh-leaderboard" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition">
+                        刷新排行榜
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-6 md:mb-8">
+            <div class="bg-white bg-opacity-90 rounded-xl shadow-xl p-4 md:p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">分享活动</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-2 text-gray-700">首次分享奖励</h3>
+                        <p class="text-sm text-gray-600 mb-3">首次分享清洁记录即可获得100经验值</p>
+                        <button class="w-full bg-yellow-400 hover:bg-yellow-500 text-white py-2 rounded-lg transition text-sm">
+                            立即参与
+                        </button>
+                    </div>
+                    <div class="border-2 border-gray-200 rounded-lg p-4">
+                        <h3 class="font-medium mb-2 text-gray-700">邀请好友奖励</h3>
+                        <p class="text-sm text-gray-600 mb-3">每邀请一位好友注册即可获得50经验值</p>
+                        <button class="w-full bg-green-400 hover:bg-green-500 text-white py-2 rounded-lg transition text-sm">
+                            邀请好友
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav md:hidden">
+        <div class="flex justify-around py-2">
+            <a href="index.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-xs mt-1">首页</span>
+            </a>
+            <a href="hero-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+                <span class="text-xs mt-1">勇者</span>
+            </a>
+            <a href="family-center.html" class="flex flex-col items-center py-2 px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                <span class="text-xs mt-1">家庭</span>
+            </a>
+            <a href="share-center.html" class="flex flex-col items-center py-2 px-3 active">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                </svg>
+                <span class="text-xs mt-1">分享</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js/shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromLocalStorage();
+            updateShareCenter();
+            
+            document.getElementById('add-friend').addEventListener('click', function() {
+                const friendCode = document.getElementById('friend-code').value;
+                if (friendCode) {
+                    addFriend(friendCode);
+                }
+            });
+            
+            document.getElementById('generate-share-card').addEventListener('click', function() {
+                generateShareCard();
+            });
+            
+            document.getElementById('refresh-leaderboard').addEventListener('click', function() {
+                refreshLeaderboard();
+            });
+        });
+        
+        function updateShareCenter() {
+            updateRecentAchievements();
+            updateShareableRecords();
+            updateFriendsList();
+        }
+        
+        function updateRecentAchievements() {
+            const achievementsContainer = document.getElementById('recent-achievements');
+            achievementsContainer.innerHTML = '';
+            
+            if (achievements && achievements.length > 0) {
+                achievements.slice(-5).reverse().forEach(achievement => {
+                    const achievementItem = document.createElement('div');
+                    achievementItem.className = 'flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200';
+                    achievementItem.innerHTML = `
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">${achievement.name}</h4>
+                            <p class="text-xs text-gray-500">${achievement.description}</p>
+                        </div>
+                        <button class="ml-auto text-blue-500 hover:text-blue-700" onclick="shareAchievement('${achievement.name}')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                        </button>
+                    `;
+                    achievementsContainer.appendChild(achievementItem);
+                });
+            } else {
+                achievementsContainer.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无成就</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateShareableRecords() {
+            const recordsContainer = document.getElementById('shareable-records');
+            recordsContainer.innerHTML = '';
+            
+            if (cleaningHistory && cleaningHistory.length > 0) {
+                cleaningHistory.slice(-3).reverse().forEach((record, index) => {
+                    const recordItem = document.createElement('div');
+                    recordItem.className = 'border border-gray-200 rounded-lg p-4';
+                    recordItem.innerHTML = `
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h3 class="font-medium">${record.roomName}</h3>
+                                <p class="text-xs text-gray-500">${formatDate(record.timestamp)} · ${formatDuration(record.duration)}</p>
+                            </div>
+                            <button class="text-blue-500 hover:text-blue-700" onclick="shareRecord(${index})">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                                <span class="text-gray-400 text-sm">清洁前</span>
+                            </div>
+                            <div class="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
+                                <span class="text-gray-400 text-sm">清洁后</span>
+                            </div>
+                        </div>
+                    `;
+                    recordsContainer.appendChild(recordItem);
+                });
+            } else {
+                recordsContainer.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>暂无清洁记录</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateFriendsList() {
+            const friendsList = document.getElementById('friends-list');
+            // 这里可以添加好友列表数据
+        }
+        
+        function shareAchievement(achievementName) {
+            alert(`分享成就：${achievementName}`);
+            // 实际分享功能实现
+        }
+        
+        function shareRecord(recordIndex) {
+            alert(`分享清洁记录 ${recordIndex + 1}`);
+            // 实际分享功能实现
+        }
+        
+        function addFriend(friendCode) {
+            alert(`添加好友：${friendCode}`);
+            // 实际添加好友功能实现
+        }
+        
+        function generateShareCard() {
+            alert('生成分享卡片');
+            // 实际生成分享卡片功能实现
+        }
+        
+        function refreshLeaderboard() {
+            alert('刷新排行榜');
+            // 实际刷新排行榜功能实现
+        }
+        
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        }
+        
+        function formatDuration(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}分钟${secs}秒`;
+        }
+    </script>
+</body>
+</html>
